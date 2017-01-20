@@ -3,7 +3,7 @@ Started a blank ionic 2 application and have ng2-dragula installed and ready to 
 
 So there are a couple changes from the tutorial video I sent you guys I fixed them so they would be up to date with current updates in ionic2 and ng2-dragula
 
-the key changes you need to make are in these three files home.ts, index.html, app.module.ts
+the key changes you need to make are in these three files **home.ts, index.html, app.module.ts**
 
 in app.module.ts
 ```typescript
