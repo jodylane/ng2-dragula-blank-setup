@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Drag & Drop Puzzle App
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-row>
+    <ion-col width-50 class="left">
+      <div class="header">First Bucket</div>
+      <ion-list [dragula]="'my-bag'" [dragulaModel]="bucket1">
+        <button ion-item *ngFor="let item of bucket1">
+          {{item}}
+        </button>
+      </ion-list>
+    </ion-col>
+    <ion-col width-50 class="left">
+      <div class="header">Second Bucket</div>
+      <ion-list [dragula]="'my-bag'" [dragulaModel]="bucket2">
+        <button ion-item *ngFor="let item of bucket2">
+          {{item}}
+        </button>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-content>
