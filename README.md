@@ -6,6 +6,8 @@ So there are a couple changes from the tutorial video I sent you guys I fixed th
 the key changes you need to make are in these three files home.ts, index.html, app.module.ts
 
 in app.module.ts
+```typescript
+
 ...
 ...
 import { DragulaModule } from '../../node_modules/ng2-dragula/ng2-dragula';
@@ -18,7 +20,9 @@ import { DragulaModule } from '../../node_modules/ng2-dragula/ng2-dragula';
 ...
 ...
 
+```
 in index.html
+```html
 ...
 ...
 
@@ -30,7 +34,10 @@ in index.html
 ...
 ...
 
+```
 in home.ts
+```typescript
+
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { DragulaService } from '../../../node_modules/ng2-dragula/ng2-dragula';
@@ -60,3 +67,5 @@ export class HomePage {
   }
 
 }
+
+```
