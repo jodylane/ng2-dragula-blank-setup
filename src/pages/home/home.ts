@@ -18,7 +18,7 @@ export class HomePage {
     }
     dragulaService.drop.subscribe((value)=>{
       let prompt = this.alertCtrl.create({
-        title: 'item mpved',
+        title: 'item moved',
         subTitle: 'so much fun!',
         buttons:['OK']
       });
