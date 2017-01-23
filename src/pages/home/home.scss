@@ -1,8 +1,11 @@
-.btn{
+@import "../../../node_modules/dragula/dist/dragula.min.css";
+ion-item{
   &:hover{
     background-color: #51a7e8;
+    cursor: pointer;
   }
 }
+
 .wrap{
   width: 70%;
   margin:0 auto;

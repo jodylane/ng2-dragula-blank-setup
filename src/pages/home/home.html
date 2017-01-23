@@ -3,36 +3,30 @@
         <ion-title>
             Drag & Drop Puzzle App
         </ion-title>
+        <button ion-button (click)="restart()">Restart</button>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+    <div class="wrap">
 
-
-    <ion-segment [(ngModel)]="puzzle">
-        <ion-segment-button value="one">Puzzle1</ion-segment-button>
-        <ion-segment-button value="two">Puzzle2</ion-segment-button>
-    </ion-segment>
-    <div [ngSwitch]="one">
-        <div class="wrap">
-            <div class="left box">
-                <h2 class="header">Animals</h2>
-                <ion-list [dragula]="'my-bag'" [dragulaModel]="bucket1">
-                    <ion-card *ngFor="let item of bucket1">
-                        <img id="{{item.name}}" padding src="{{item.picture}}">
-                    </ion-card>
-                </ion-list>
-            </div>
-            <div class="right box">
-                <h2 class="header">Fruit</h2>
-                <ion-list [dragula]="'my-bag'" [dragulaModel]="bucket2">
-                    <button class="btn" ion-item *ngFor="let item of bucket2">
-                        {{item.picture}}
-                    </button>
-                </ion-list>
-            </div>
+        <div class="left box">
+            <h2 class="header">Animals</h2>
+            <ion-list [dragula]="'my-bag'" [dragulaModel]="bucket1">
+                <ion-item *ngFor="let item of bucket1">
+                    <ion-thumbnail item-left><img src="{{item.picture}}"></ion-thumbnail>
+                    <p>{{item.name}}</p>
+                </ion-item>
+            </ion-list>
+        </div>
+        <div class="right box">
+            <h2 class="header">Fruit</h2>
+            <ion-list [dragula]="'my-bag'" [dragulaModel]="bucket2">
+                <ion-item class="jericho" *ngFor="let item of bucket2">
+                    <ion-thumbnail item-left><img src="{{item.picture}}"></ion-thumbnail>
+                    <p class="{{item.category}}">{{item.name}}</p>
+                </ion-item>
+            </ion-list>
         </div>
     </div>
-
-
 </ion-content>
