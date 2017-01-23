@@ -60,36 +60,61 @@ export class HomePage {
         });
         dragulaService.drop.subscribe((value) => {
             this.onDrop(value);
-            let prompt = this.alertCtrl.create({
-                title: 'item moved',
-                subTitle: 'so much fun!',
-                buttons: ['OK']
-            });
-            prompt.present();
         });
     }
 
     private onDrag(args):void{
         console.log("onDrag: ", args);
-        let [bagname,target,source]= args;
+        let [bagname,target,previousContainer]= args;
         let targetClass = target.childNodes[0].className;
-        let sourceClass = source.className.split(" ");
-        let sourceList = source.children;
+        let sourceClass = previousContainer.className.split(" ");
+        let sourceList = previousContainer.children;
         sourceClass = sourceClass.shift();
-        console.log("sourceList: ",sourceList)
-        for(let i = 0;i < sourceList.length;i++){
-            let entry = sourceList[i];
-            console.log(entry.children);
-        }
+
         console.log(targetClass, sourceClass)
     }
     private onDrop(args): void {
         console.log("onDrop: ", args);
-        let [bagname,target,l,k,j] = args;
-
+        let [bagname,target,currentContainer,previousContainer,nextSibling] = args;
+        let targetClass = target.children[0].className;
+        let containerClassList = currentContainer.children;
+        console.log("classList: ",containerClassList);
+        let classList = [];
+        for(let i = 0;i < containerClassList.length;i++){
+            classList.push(containerClassList[i].children[0].className)
+        }
+        this.didIWin(classList);
     }
-    didIWin(item):void {
-        console.log("hello world: ",item)
+    didIWin(list):void {
+        let fruit = 0;
+        let animal = 0;
+        for(let i = 0;i < list.length;i++){
+
+            if(list[i] == "fruit"){
+                fruit++;
+                console.log('i am fruit')
+            }else if(list[i] == "animals"){
+                animal++;
+                console.log("i am animal")
+            }
+
+        }
+        if(animal == 0 && fruit == 3 || fruit == 0 && animal == 3){
+            let prompt = this.alertCtrl.create({
+                title: 'You Win',
+                subTitle: 'Hooray!!',
+                buttons: ['OK']
+            });
+            prompt.present();
+        }else{
+            let prompt = this.alertCtrl.create({
+                title: 'Somethings not right here..',
+                subTitle: '??????',
+                buttons: ['OK']
+            });
+            prompt.present();
+        }
+        console.log("a: ",animal, "f: ",fruit)
     }
     startGame():void{
         for (let i = 0; i < this.food.length; i++) {
