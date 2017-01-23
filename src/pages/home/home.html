@@ -12,19 +12,23 @@
 
         <div class="left box">
             <h2 class="header">Animals</h2>
-            <ion-list [dragula]="'my-bag'" [dragulaModel]="bucket1">
+            <ion-list class="animals" [dragula]="'my-bag'" [dragulaModel]="bucket1">
                 <ion-item *ngFor="let item of bucket1">
-                    <ion-thumbnail item-left><img src="{{item.picture}}"></ion-thumbnail>
+                    <div *ngIf="item.category == 'animals'"><h1 class="correct">Correct</h1></div>
+                    <div *ngIf="item.category != 'animals'"><h1 class="incorrect">Incorrect</h1></div>
+                    <ion-thumbnail item-left class="{{item.category}}"><img src="{{item.picture}}"></ion-thumbnail>
                     <p>{{item.name}}</p>
                 </ion-item>
             </ion-list>
         </div>
         <div class="right box">
             <h2 class="header">Fruit</h2>
-            <ion-list [dragula]="'my-bag'" [dragulaModel]="bucket2">
-                <ion-item class="jericho" *ngFor="let item of bucket2">
-                    <ion-thumbnail item-left><img src="{{item.picture}}"></ion-thumbnail>
-                    <p class="{{item.category}}">{{item.name}}</p>
+            <ion-list class="fruit" [dragula]="'my-bag'" [dragulaModel]="bucket2">
+                <ion-item *ngFor="let item of bucket2" (click)="didIWin(item)">
+                    <div *ngIf="item.category == 'fruit'"><h1 class="correct">Correct</h1></div>
+                    <div *ngIf="item.category != 'fruit'"><h1 class="incorrect">Incorrect</h1></div>
+                    <ion-thumbnail item-left class="{{item.category}}"><img src="{{item.picture}}"></ion-thumbnail>
+                    <p>{{item.name}}</p>
                 </ion-item>
             </ion-list>
         </div>

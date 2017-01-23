@@ -5,7 +5,12 @@ ion-item{
     cursor: pointer;
   }
 }
-
+.correct{
+  color: green !important;
+}
+.incorrect{
+  color: red !important;
+}
 .wrap{
   width: 70%;
   margin:0 auto;

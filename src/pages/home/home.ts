@@ -12,51 +12,52 @@ export class HomePage {
         {
             "name": "Pineapple",
             "picture": "http://www.foodlecompany.com/wp-content/uploads/2015/04/pineapple.jpg",
-            "category": "Fruit"
+            "category": "fruit"
         },
         {
             "name": "Mango",
             "picture": "http://images.wisegeek.com/mango.jpg",
-            "category": "Fruit"
+            "category": "fruit"
         },
         {
             "name": "Grapes",
             "picture": "http://eatgoodfood.org/wp-content/uploads/2013/11/grapes-health-benefits.jpg",
-            "category": "Fruit"
+            "category": "fruit"
         },
         {
             "name": "Strawberries",
             "picture": "http://www.thepacker.com/sites/produce/files/field/image/strawberries-2.jpg",
-            "category": "Fruit"
+            "category": "fruit"
         }];
     animals = [
         {
             "name": "Cow",
             "picture": "http://animal-dream.com/data_images/cow/cow3.jpg",
-            "category": "Animal"
+            "category": "animals"
         },
         {
             "name": "Chicken",
             "picture": "http://animal-dream.com/data_images/chicken/chicken6.jpg",
-            "category": "Animal"
+            "category": "animals"
         },
         {
             "name": "Dog",
             "picture": "http://cdn3-www.dogtime.com/assets/uploads/2014/08/file_23300_cane-corso-dog-breed.jpg",
-            "category": "Animal"
+            "category": "animals"
         },
         {
             "name": "Cat",
             "picture": "http://animal-dream.com/data_images/cat/cat6.jpg",
-            "category": "Animal"
+            "category": "animals"
         }];
     bucket1 = [];
     bucket2 = [];
 
     constructor(public navCtrl: NavController, private dragulaService: DragulaService, private alertCtrl: AlertController) {
-
         this.startGame();
-
+        dragulaService.drag.subscribe((value)=>{
+            this.onDrag(value);
+        });
         dragulaService.drop.subscribe((value) => {
             this.onDrop(value);
             let prompt = this.alertCtrl.create({
@@ -68,23 +69,30 @@ export class HomePage {
         });
     }
 
+    private onDrag(args):void{
+        console.log("onDrag: ", args);
+        let [bagname,target,source]= args;
+        let targetClass = target.childNodes[0].className;
+        let sourceClass = source.className.split(" ");
+        let sourceList = source.children;
+        sourceClass = sourceClass.shift();
+        console.log("sourceList: ",sourceList)
+        for(let i = 0;i < sourceList.length;i++){
+            let entry = sourceList[i];
+            console.log(entry.children);
+        }
+        console.log(targetClass, sourceClass)
+    }
     private onDrop(args): void {
         console.log("onDrop: ", args);
-        let [source,target,l,k,j] = args;
-        let array = [];
-        for(let i = 0;i < l.childNodes.length;i++){
-            array.push(l.childNodes[i]);
-            console.log(array)
-        }
-        array.splice(0,2);
-        array.splice(array.length -1,1);
-        console.log(array)
-        console.log(l)
+        let [bagname,target,l,k,j] = args;
 
+    }
+    didIWin(item):void {
+        console.log("hello world: ",item)
     }
     startGame():void{
         for (let i = 0; i < this.food.length; i++) {
-            console.log(i % 2);
             if (i % 2 == 0) {
                 this.bucket1.push(this.food[i]);
                 this.bucket1.push(this.animals[i]);
