@@ -2,12 +2,14 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { MemoryPage } from '../pages/memory/memory';
 import { DragulaModule } from '../../node_modules/ng2-dragula/ng2-dragula';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    MemoryPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -16,7 +18,8 @@ import { DragulaModule } from '../../node_modules/ng2-dragula/ng2-dragula';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    MemoryPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
