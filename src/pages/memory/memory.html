@@ -6,12 +6,22 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Memory</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Memory</ion-title>
+    </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-<button ion-button color="primary" (click)="restartGame()">Restart</button>
+    <button ion-button color="primary" (click)="restartGame()">Restart</button>
+    <div class="wrap">
+        <div class="board">
+            <div class="disabled"></div>
+
+            <div class="tile" *ngFor="let item of memorySquares">
+                <div class="{{item}} active" (click)="matchMaker(item)">{{item}}</div>
+            </div>
+        </div>
+    </div>
+
 </ion-content>
