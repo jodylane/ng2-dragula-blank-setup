@@ -68,7 +68,7 @@ export class HomePage {
         let [bagname,target,previousContainer]= args;
         let targetClass = target.childNodes[0].className;
         let sourceClass = previousContainer.className.split(" ");
-        let sourceList = previousContainer.children;
+        // let sourceList = previousContainer.children;
         sourceClass = sourceClass.shift();
 
         console.log(targetClass, sourceClass)
@@ -76,7 +76,7 @@ export class HomePage {
     private onDrop(args): void {
         console.log("onDrop: ", args);
         let [bagname,target,currentContainer,previousContainer,nextSibling] = args;
-        let targetClass = target.children[0].className;
+        // let targetClass = target.children[0].className;
         let containerClassList = currentContainer.children;
         console.log("classList: ",containerClassList);
         let classList = [];

@@ -19,7 +19,7 @@
             <div class="disabled"></div>
 
             <div class="tile" *ngFor="let item of memorySquares">
-                <div class="{{item}} active" (click)="matchMaker(item)">{{item}}</div>
+                <div *ngIf="!item.checked" class="{{item.colorName}} active" (click)="matchMaker(item)">{{item.colorName}}</div>
             </div>
         </div>
     </div>
