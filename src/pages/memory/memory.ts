@@ -49,8 +49,9 @@ export class MemoryPage {
         }
 
         for(let i = 0;i < this.memorySquares.length;i++){
-             this.memorySquares[i].id = this.memorySquares[i].colorName + i;
-
+            console.log(this.memorySquares[i].id,this.memorySquares.length)
+             let id = this.memorySquares[i].id = i;
+            this.memorySquares.push(id);
 
             console.log(this.memorySquares[i].id,this.memorySquares.length)
         }
