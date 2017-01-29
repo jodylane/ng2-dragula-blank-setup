@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams, AlertController} from 'ionic-angular';
+import {NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 
 /*
  Generated class for the Memory page.
@@ -17,12 +17,14 @@ export class MemoryPage {
     squares = [];
     memorySquares = [];
     match = [];
+    tick = 5;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,public toastCtrl: ToastController) {
         this.startGame();
     }
 
     startGame(): void {
+        this.timeOut();
         this.colors = [
             {
                 "colorName": "blue"
@@ -71,12 +73,15 @@ export class MemoryPage {
 
     matchMaker(item):void{
         console.log(item);
+        let tryAgain = 0;
         this.match.push(item);
-
+        // shows the color of object 1 and 2
         if(this.match.length == 1){
             this.show(this.match[0]);
         }else if(this.match.length == 2){
             this.show(this.match[1]);
+            // if the color names match then it checks for the same id
+            // if the ids are different then we have a match and we disable the two colors
             if(this.match[0].colorName == this.match[1].colorName){
                 if(this.match[0].id != this.match[1].id){
                     console.log("we match and are not the same");
@@ -85,40 +90,59 @@ export class MemoryPage {
                             if(this.memorySquares[j].id == this.match[i].id){
                                 this.memorySquares[j].solved = true;
                                 console.log(this.memorySquares[j]);
-                                this.memorySquares.splice(j,1);
                             }
                         }
                     }
+                    for(let k = 0;k < this.memorySquares.length;k++){
+                        if(!this.memorySquares[k].solved){
+                            tryAgain++;
+                        }
+                        console.log(tryAgain)
+                    }
+                    if(tryAgain == 0){
+                        this.toast("You Won!!")
+                    }
                     this.match = [];
                 }else{
+                    this.hide(this.match.length, this.match);
                     this.match = [];
                     console.log("we dont match")
                 }
 
             }else {
+                this.hide(this.match.length, this.match);
                 this.match = [];
             }
         }
         console.log(this.match, this.memorySquares)
     }
-    show(index):void{
+    show(object):void{
         for(let i = 0;i < this.memorySquares.length;i++) {
-            if(this.memorySquares[i].id == this.match[index].id) {
+            if(this.memorySquares[i].id == object.id) {
                 this.memorySquares[i].checked = true;
             }
         }
     }
-    hide(index):void{
-        for(let i = 0;i < this.match.length;i++){
+    hide(length, object):void{
+        for(let i = 0;i < length;i++){
             for(let j = 0;j < this.memorySquares.length;j++){
-                if(this.memorySquares[j].id == this.match[i].id){
-                    this.memorySquares[j].solved = true;
-                    console.log(this.memorySquares[j]);
-                    this.memorySquares.splice(j,1);
+                if(this.memorySquares[j].id == object[i].id){
+                    this.memorySquares[j].checked = false;
                 }
             }
         }
-
-        
+    }
+    toast(message):void{
+        let toast = this.toastCtrl.create({
+            message: message,
+            duration: 3000,
+            position: "middle"
+        });
+        toast.present();
+    }
+    timeOut():void{
+        setTimeout(() =>{
+            this.tick--;
+        },1000)
     }
 }

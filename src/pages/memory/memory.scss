@@ -28,6 +28,14 @@
     border: 1px solid #000000;
     opacity: .6;
   }
+  .disableTile{
+    background-color: #2d2d2d;
+    border-color: transparent;
+    height: 100%;
+    width: 100%;
+    cursor: default;
+    opacity: .6;
+  }
 }
 .blue{
   background-color: blue;
