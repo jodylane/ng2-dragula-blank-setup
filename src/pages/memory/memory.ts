@@ -17,7 +17,6 @@ export class MemoryPage {
     squares = [];
     memorySquares = [];
     match = [];
-    tick = 5;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,public toastCtrl: ToastController) {
         this.startGame();
@@ -140,9 +139,11 @@ export class MemoryPage {
         });
         toast.present();
     }
-    timeOut():void{
+    timeOut():any{
+        let tick = 0;
         setTimeout(() =>{
-            this.tick--;
+            tick++;
+            return tick
         },1000)
     }
 }
